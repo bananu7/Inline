@@ -17,7 +17,11 @@ type Commands = Map String Command
 
 ls :: Command
 ls _ = do
+    sys <- get
+    let sysfiles = files sys
+
     liftIO $ putStrLn "ls"
+    liftIO $ mapM_ (putStrLn . fst) (toList sysfiles)
 
 cat :: Command
 cat params = do
